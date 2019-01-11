@@ -69,7 +69,8 @@
                                     <label>Quantity</label>
                                     <input type="number" />
                                     <div class="mt-1">
-                                        <a href="payment" class="btn btn-primary btn-sm">Buy Now</a>
+                                        <button type="button" class="btn btn-primary btn-sm" id="buyBtn_{{item_code}}">Buy
+                                            Now</button>
                                     </div>
                                 </div>
                             </form>
@@ -94,10 +95,10 @@
 
 <script>
 
-    //var sample = "{{ items.item_code }}"
+    var sample = "{{item_code}}"
 
-    //$("#buyBtn_JF-46342").on("click", function () {
-     //   alert(sample)
-    //});
+    $("#buyBtn_JF-46342").on("click", function () {
+        console.log(JSON.stringify(sample));
+    });
 
 </script>
