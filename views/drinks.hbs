@@ -27,102 +27,62 @@
 
 <div class="row">
 
+    {{#each items}}
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="{{item_url}}" alt=""></a>
             <div class="card-body">
                 <h4 class="card-title">
-                    <a href="#">Item One</a>
+                    <a href="#{{item_code}}" data-toggle="modal">{{item_name}}</a>
                 </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <h5>{{item_price}}</h5>
+                <p class="card-text">{{item_desc}}</p>
             </div>
             <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
             </div>
         </div>
     </div>
+    {{/each}}
 
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#">Item Two</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!
-                    Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#">Item Three</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
-        </div>
-    </div>
+    {{#each items}}
+    <div class="modal fade" id="{{item_code}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#">Item Four</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
-        </div>
-    </div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">{{item_name}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#">Item Five</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!
-                    Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
-        </div>
-    </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <img class="card-img-top" src="{{item_url}}" alt=""></a>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="container">
+                                <label>Quantity</label>
+                                <input type="number" />
+                                <div class="mt-1">
+                                    <button type="button" class="btn btn-primary btn-sm">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#">Item Six</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-danger btn-sm">Add to Cart</button>
+                </div>
+
             </div>
         </div>
     </div>
+    {{/each}}
 
 </div>

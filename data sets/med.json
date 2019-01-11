@@ -1,0 +1,64 @@
+[{
+    "item_code": "MK-46332",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Biogesic",
+    "item_price": "P24.50",
+    "item_desc": "1.5L",
+    "item_cate": "Med Kit"
+}, {
+    "item_code": "MK-46333",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Bioflu",
+    "item_price": "P14.50",
+    "item_desc": "1.5L",
+    "item_cate": "Med Kit"
+}, {
+    "item_code": "MK-46334",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Neozep",
+    "item_price": "P14.50",
+    "item_desc": "1.5L",
+    "item_cate": "Med Kit"
+}, {
+    "item_code": "MK-46335",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Decolgen",
+    "item_price": "P24.50",
+    "item_desc": "1L",
+    "item_cate": "Med Kit"
+}, {
+    "item_code": "MK-46336",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Bonamine",
+    "item_price": "P24.50",
+    "item_desc": "1L",
+    "item_cate": "Med Kit"
+}, {
+    "item_code": "MK-46337",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Diatabs",
+    "item_price": "P54.50",
+    "item_desc": "1.5L",
+    "item_cate": "Med Kit"
+}, {
+    "item_code": "FAK-46338",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Betandine",
+    "item_price": "P4.50",
+    "item_desc": "Small",
+    "item_cate": "First Aid Kit"
+}, {
+    "item_code": "FAK-46339",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Happy Cotton",
+    "item_price": "P34.50",
+    "item_desc": "Mucho",
+    "item_cate": "First Aid Kit"
+}, {
+    "item_code": "FAK-46330",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Band Aid",
+    "item_price": "P24.50",
+    "item_desc": "Grande",
+    "item_cate": "First Aid Kit"
+}]

@@ -1,0 +1,64 @@
+[{
+    "item_code": "SD-46332",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Coca-Cola",
+    "item_price": "P24.50",
+    "item_desc": "1.5L",
+    "item_cate": "Softdrinks"
+}, {
+    "item_code": "SD-46333",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Royal",
+    "item_price": "P14.50",
+    "item_desc": "1.5L",
+    "item_cate": "Softdrinks"
+}, {
+    "item_code": "SD-46334",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Pepsi",
+    "item_price": "P14.50",
+    "item_desc": "1.5L",
+    "item_cate": "Softdrinks"
+}, {
+    "item_code": "MW-46335",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Le Minerale",
+    "item_price": "P24.50",
+    "item_desc": "1L",
+    "item_cate": "Mineral Water"
+}, {
+    "item_code": "MW-46336",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Nature Spring",
+    "item_price": "P24.50",
+    "item_desc": "1L",
+    "item_cate": "Mineral Water"
+}, {
+    "item_code": "SD-46337",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Mirinda",
+    "item_price": "P54.50",
+    "item_desc": "1.5L",
+    "item_cate": "Softdrinks"
+}, {
+    "item_code": "TJ-46338",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Sunkist",
+    "item_price": "P4.50",
+    "item_desc": "Small",
+    "item_cate": "Tetra Juice"
+}, {
+    "item_code": "Liq-46339",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Red Horse",
+    "item_price": "P34.50",
+    "item_desc": "Mucho",
+    "item_cate": "Liquor"
+}, {
+    "item_code": "Liq-46330",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "San Miguel Pale Pilsen",
+    "item_price": "P24.50",
+    "item_desc": "Grande",
+    "item_cate": "Liqour"
+}]

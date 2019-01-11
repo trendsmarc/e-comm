@@ -5,3 +5,7 @@
 .alingnenaFooter {
     background-color: #006995;
 }
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}

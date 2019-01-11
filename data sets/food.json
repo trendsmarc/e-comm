@@ -1,0 +1,64 @@
+[{
+    "item_code": "JF-46342",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Chippy",
+    "item_price": "P24.50",
+    "item_desc": "Large",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46343",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Snaku",
+    "item_price": "P14.50",
+    "item_desc": "Medium",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46344",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Sweet Corn",
+    "item_price": "P14.50",
+    "item_desc": "Medium",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46345",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "V-cut",
+    "item_price": "P24.50",
+    "item_desc": "Large",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46346",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Piattos",
+    "item_price": "P24.50",
+    "item_desc": "Large",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46347",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Cheettos",
+    "item_price": "P54.50",
+    "item_desc": "Large",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46348",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Lala",
+    "item_price": "P4.50",
+    "item_desc": "Small",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46349",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Pic-A",
+    "item_price": "P34.50",
+    "item_desc": "X-Large",
+    "item_cate": "Junk Food"
+}, {
+    "item_code": "JF-46350",
+    "item_url": "/images/Food/chippy.jpg",
+    "item_name": "Tempura",
+    "item_price": "P24.50",
+    "item_desc": "X-Large",
+    "item_cate": "Junk Food"
+}]
