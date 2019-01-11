@@ -4,11 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', {
-    title: "Item One",
-    title2: "Item Two",
-
-    price: "P24.50",
-    price2: "P50.50"
+    title: "Item One"
   });
 });
 
