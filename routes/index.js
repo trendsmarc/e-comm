@@ -8,12 +8,11 @@ var toiletries = require("../data sets/toiletries.json");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-
   res.render('index', {
-    items: food
+    items: food,
+    encodedfoodJson: encodeURIComponent(JSON.stringify(food))
   });
-});
-
+})
 router.get('/drinks', function (req, res, next) {
   res.render('drinks', {
     items: drinks
@@ -39,8 +38,10 @@ router.get('/toiletries', function (req, res, next) {
 });
 
 router.get('/payment', function (req, res, next) {
+
   res.render('payment', {
     header: "Payment now!"
+
   });
 });
 

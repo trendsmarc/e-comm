@@ -67,7 +67,7 @@
                             <form action="payment" method="GET">
                                 <div class="container">
                                     <label>Quantity</label>
-                                    <input type="number" />
+                                    <input type="number" id="qty_{{item_code}}" />
                                     <div class="mt-1">
                                         <button type="button" class="btn btn-primary btn-sm" id="buyBtn_{{item_code}}">Buy
                                             Now</button>
@@ -80,7 +80,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-danger btn-sm">Add to Cart</button>
+                    <button type="button" id="addToCart_{{item_code}}" class="btn btn-default btn-danger btn-sm">Add to
+                        Cart</button>
                 </div>
 
             </div>
@@ -90,15 +91,42 @@
 
 </div>
 
-<script src="javascripts/jquery.cookie.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="javascripts/script.js"></script>
 
 <script>
 
-    var sample = "{{item_code}}"
+    var decodedJson = decodeURIComponent("{{{encodedJson}}}");
+    var jsonObj = JSON.parse(decodedJson);
+    var jsonLength = jsonObj.length;
 
-    $("#buyBtn_JF-46342").on("click", function () {
-        console.log(JSON.stringify(sample));
-    });
+    for (let index in jsonObj) {
+
+        $("#addToCart_" + jsonObj[index].item_code).click(function () {
+
+            var tempItemCode = jsonObj[index].item_code;
+            var tempItemURL = jsonObj[index].item_url;
+            var tempItemName = jsonObj[index].item_name;
+            var tempItemPrice = jsonObj[index].item_price;
+            var tempItemDesc = jsonObj[index].item_desc;
+            var tempItemCate = jsonObj[index].item_cate;
+
+            Cookies.set("item_" + tempItemCode, [{
+                "item_code": tempItemCode,
+                "item_url": tempItemURL,
+                "item_name": tempItemName,
+                "item_price": tempItemPrice,
+                "item_desc": tempItemDesc,
+                "item_cate": tempItemCate,
+                "item_qnty": $("#qty_" + tempItemCode).val()
+            }]);
+
+            console.log(Cookies.get("items"));
+        });
+    }
+
+
+
 
 </script>
