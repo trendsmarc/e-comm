@@ -27,6 +27,8 @@
 
 <div class="row">
 
+    {{!-- <button class="btn-default" id="sampleBtn">PUSH</button> --}}
+
     {{#each items}}
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
@@ -67,7 +69,7 @@
                             <form action="payment" method="GET">
                                 <div class="container">
                                     <label>Quantity</label>
-                                    <input type="number" id="qty_{{item_code}}" />
+                                    <input type="number" min="1" value="1" id="qty_{{item_code}}" />
                                     <div class="mt-1">
                                         <button type="button" class="btn btn-primary btn-sm" id="buyBtn_{{item_code}}">Buy
                                             Now</button>
@@ -93,13 +95,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="javascripts/script.js"></script>
 
 <script>
 
-    var decodedJson = decodeURIComponent("{{{encodedJson}}}");
+    var decodedJson = decodeURIComponent("{{{decodedJson}}}");
     var jsonObj = JSON.parse(decodedJson);
-    var jsonLength = jsonObj.length;
+
+
+    if (Cookies.get("ITEMS") == undefined) {
+        $("#cartCount").text(0);
+    } else {
+        $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
+    }
 
     for (let index in jsonObj) {
 
@@ -112,7 +119,15 @@
             var tempItemDesc = jsonObj[index].item_desc;
             var tempItemCate = jsonObj[index].item_cate;
 
-            Cookies.set("item_" + tempItemCode, [{
+            var cookies = [Cookies.get("ITEMS")];
+
+            if (Cookies.get("ITEMS") == undefined) {
+                cookies = [];
+            } else {
+                cookies = Cookies.get("ITEMS").split(",");
+            }
+
+            cookies.push(JSON.stringify({
                 "item_code": tempItemCode,
                 "item_url": tempItemURL,
                 "item_name": tempItemName,
@@ -120,11 +135,35 @@
                 "item_desc": tempItemDesc,
                 "item_cate": tempItemCate,
                 "item_qnty": $("#qty_" + tempItemCode).val()
-            }]);
+            }));
 
-            console.log(Cookies.get("items"));
+            Cookies.set("ITEMS", cookies.toString());
+
+            $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
+            setCookieInServer();
         });
     }
+
+    setCookieInServer();
+
+
+    function setCookieInServer() {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            contentType: "application/json",
+            data: JSON.stringify({ cookie: Cookies.get("ITEMS") }),
+            url: "/getCookie",
+            success: function (result) {
+
+            }, error: function (errVal) {
+
+
+            }
+        });
+    }
+
+
 
 
 

@@ -3,19 +3,26 @@
         <div class="row">
             <div class="col-lg-8 my-2 py-4">
                 <h1>{{header}}</h1>
+                {{#each data}}
                 <div class="row">
-                    <div class="col-md-4 card">
+                    <div class="col-md-3 card">
                         <label>ITEM:</label>
-                        <a href="#"><img class="card-img-top" src="{{item_url}}" alt=""></a>
+                        <a href="#">{{item_name}}</a>
                     </div>
-                    <div class="col-md-4 card">
+                    <div class="col-md-3 card">
                         <label>PRICE:</label>
-                        <h2>{{item_name}}</h2>
+                        <h2 id="price_{{item_code}}">{{item_price}}</h2>
                     </div>
-                    <div class="col-md-4 card">
+                    <div class="col-md-3 card">
                         <label>QUANTITY:</label>
+                        <span id="qnty_{{item_code}}">{{item_qnty}}</span>
+                    </div>
+                    <div class="col-md-3 card">
+                        <label>TOTAL:</label>
+                        <span id="total_{{item_code}}"></span>
                     </div>
                 </div>
+                {{/each}}
             </div>
             <div class="col-lg-4 my-2 py-4">
                 <div class="card p-2">
@@ -33,3 +40,21 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    var decodedJson = decodeURIComponent("{{{decodedJson}}}");
+    var jsonObj = JSON.parse(decodedJson);
+
+    for (let i in jsonObj) {
+
+        $("#total_" + jsonObj[i].item_code).text(
+            parseFloat($("#qnty_" + jsonObj[i].item_code).text()) * parseFloat($("#price_" + jsonObj[i].item_code).text()));
+
+    }
+
+</script>

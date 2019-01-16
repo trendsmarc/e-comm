@@ -69,7 +69,7 @@
                         <div class="col-sm-7">
                             <div class="container">
                                 <label>Quantity</label>
-                                <input type="number" />
+                                <input type="number" id="qty_{{item_code}}" />
                                 <div class="mt-1">
                                     <button type="button" class="btn btn-primary btn-sm">Buy Now</button>
                                 </div>
@@ -80,7 +80,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-danger btn-sm">Add to Cart</button>
+                    <button type="button" id="addToCart_{{item_code}}" class="btn btn-default btn-danger btn-sm">Add to
+                        Cart</button>
                 </div>
 
             </div>
@@ -89,3 +90,84 @@
     {{/each}}
 
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    var decodedJson = decodeURIComponent("{{{decodedJson}}}");
+    var jsonObj = JSON.parse(decodedJson);
+
+
+    if (Cookies.get("ITEMS") == undefined) {
+        $("#cartCount").text(0);
+    } else {
+        $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
+    }
+
+
+
+    for (let index in jsonObj) {
+
+        $("#addToCart_" + jsonObj[index].item_code).click(function () {
+
+            var tempItemCode = jsonObj[index].item_code;
+            var tempItemURL = jsonObj[index].item_url;
+            var tempItemName = jsonObj[index].item_name;
+            var tempItemPrice = jsonObj[index].item_price;
+            var tempItemDesc = jsonObj[index].item_desc;
+            var tempItemCate = jsonObj[index].item_cate;
+
+            var cookies = [Cookies.get("ITEMS")];
+
+            if (Cookies.get("ITEMS") == undefined) {
+                cookies = [];
+            } else {
+                cookies = Cookies.get("ITEMS").split(",");
+            }
+
+
+            cookies.push(JSON.stringify({
+                "item_code": tempItemCode,
+                "item_url": tempItemURL,
+                "item_name": tempItemName,
+                "item_price": tempItemPrice,
+                "item_desc": tempItemDesc,
+                "item_cate": tempItemCate,
+                "item_qnty": $("#qty_" + tempItemCode).val()
+            }));
+
+            //console.log(cookies.toString())
+            Cookies.set("ITEMS", cookies.toString());
+
+            //console.log(cookies.toString());
+
+
+            $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
+            setCookieInServer();
+
+
+        });
+    }
+
+    setCookieInServer();
+
+
+    function setCookieInServer() {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            contentType: "application/json",
+            data: JSON.stringify({ cookie: Cookies.get("ITEMS") }),
+            url: "/getCookie",
+            success: function (result) {
+
+            }, error: function (errVal) {
+
+
+            }
+        });
+    }
+</script>
