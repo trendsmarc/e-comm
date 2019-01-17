@@ -108,6 +108,8 @@
         $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
     }
 
+
+
     for (let index in jsonObj) {
 
         $("#addToCart_" + jsonObj[index].item_code).click(function () {
@@ -120,27 +122,51 @@
             var tempItemCate = jsonObj[index].item_cate;
 
             var cookies = [Cookies.get("ITEMS")];
+            var jsoncookie = "";
+            var hasDuplicate = false;
+            var fakingIndex = 0;
 
             if (Cookies.get("ITEMS") == undefined) {
                 cookies = [];
             } else {
                 cookies = Cookies.get("ITEMS").split(",");
+                jsoncookie = JSON.parse("[" + Cookies.get("ITEMS") + "]");
             }
 
-            cookies.push(JSON.stringify({
-                "item_code": tempItemCode,
-                "item_url": tempItemURL,
-                "item_name": tempItemName,
-                "item_price": tempItemPrice,
-                "item_desc": tempItemDesc,
-                "item_cate": tempItemCate,
-                "item_qnty": $("#qty_" + tempItemCode).val()
-            }));
+            for (let d in jsoncookie) {
+                if (jsoncookie[d].item_code == tempItemCode) {
+                    hasDuplicate = true;
+                    fakingIndex = d;
 
-            Cookies.set("ITEMS", cookies.toString());
+
+                }
+            }
+
+            if (hasDuplicate) {
+                jsoncookie[fakingIndex].item_qnty = parseInt(jsoncookie[fakingIndex].item_qnty) + parseInt($("#qty_" + tempItemCode).val());
+                //console.log("eto ung sa may duplicate: " + JSON.stringify(jsoncookie))
+                var tempData = JSON.stringify(jsoncookie).toString().replace("[", "");
+                Cookies.set("ITEMS", tempData.replace("]", ""));
+            } else {
+                cookies.push(JSON.stringify({
+                    "item_code": tempItemCode,
+                    "item_url": tempItemURL,
+                    "item_name": tempItemName,
+                    "item_price": tempItemPrice,
+                    "item_desc": tempItemDesc,
+                    "item_cate": tempItemCate,
+                    "item_qnty": $("#qty_" + tempItemCode).val()
+                }));
+                //console.log("eto ung sa walang duplicate: " + cookies.toString())
+                Cookies.set("ITEMS", cookies.toString());
+            }
+
+
 
             $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
             setCookieInServer();
+
+
         });
     }
 
@@ -162,10 +188,4 @@
             }
         });
     }
-
-
-
-
-
-
 </script>

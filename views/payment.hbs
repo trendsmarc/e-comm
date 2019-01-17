@@ -1,41 +1,48 @@
 <div class="container">
-    <div class="col-12">
-        <div class="row">
-            <div class="col-lg-8 my-2 py-4">
-                <h1>{{header}}</h1>
-                {{#each data}}
-                <div class="row">
-                    <div class="col-md-3 card">
-                        <label>ITEM:</label>
-                        <a href="#">{{item_name}}</a>
-                    </div>
-                    <div class="col-md-3 card">
-                        <label>PRICE:</label>
-                        <h2 id="price_{{item_code}}">{{item_price}}</h2>
-                    </div>
-                    <div class="col-md-3 card">
-                        <label>QUANTITY:</label>
-                        <span id="qnty_{{item_code}}">{{item_qnty}}</span>
-                    </div>
-                    <div class="col-md-3 card">
-                        <label>TOTAL:</label>
-                        <span id="total_{{item_code}}"></span>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
-            <div class="col-lg-4 my-2 py-4">
-                <div class="card p-2">
-                    <h5>Shipping and Billing</h5>
-                    <label>ship to:</label>
-                    <p>Marc Asinas</p>
-                    <p>B2 L2 Mayon St. Country Homes Muntinlupa city</p>
-                    <form>
-                        <div class="form-group">
+    <div class="row">
+        <div class="col-lg-8 my-2 py-4">
+            <h1>{{header}}</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ITEM</th>
+                        <th>PRICE</th>
+                        <th>QUANTITY</th>
+                        <th>TOTAL</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
 
-                        </div>
-                    </form>
-                </div>
+                {{#each data}}
+                <tbody>
+                    <tr>
+                        <td>{{item_name}}</td>
+                        <td id="price_{{item_code}}">{{item_price}}</td>
+                        <td> <input type="number" min="1" id="qnty_{{item_code}}" value="{{item_qnty}}"></td>
+                        <td id="total_{{item_code}}"></td>
+                        <td><button class="btn btn-sm btn-danger" id="delBtn_{{item_code}}">DELETE</button></td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+            <div id="noItem">
+                <h5>
+                    Cart is empty, group yourself into 5.
+                </h5>
+            </div>
+        </div>
+        <div class="
+                                col-lg-4 my-2 py-4">
+            <div class="card p-2">
+                <h5>Shipping and Billing</h5>
+                <label>ship to:</label>
+                <p>Marc Asinas</p>
+                <p>B2 L2 Mayon St. Country Homes Muntinlupa city</p>
+                <form>
+                    <div class="form-group">
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -46,15 +53,59 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
+    var jsonObj = [];
 
-    var decodedJson = decodeURIComponent("{{{decodedJson}}}");
-    var jsonObj = JSON.parse(decodedJson);
+    if (Cookies.get("ITEMS") == undefined) {
+        jsonObj = [];
+
+    } else {
+        jsonObj = JSON.parse("[" + Cookies.get("ITEMS") + "]");
+
+    }
 
     for (let i in jsonObj) {
 
         $("#total_" + jsonObj[i].item_code).text(
-            parseFloat($("#qnty_" + jsonObj[i].item_code).text()) * parseFloat($("#price_" + jsonObj[i].item_code).text()));
+            (parseFloat($("#qnty_" + jsonObj[i].item_code).val()) * parseFloat($("#price_" + jsonObj[i].item_code).text())).toFixed(2));
 
+        $("#delBtn_" + jsonObj[i].item_code).click(function () {
+            alert(jsonObj[i].item_code);
+
+        })
+
+        $("#qnty_" + jsonObj[i].item_code).on('change', function () {
+            $("#total_" + jsonObj[i].item_code).text(
+                (parseFloat($("#qnty_" + jsonObj[i].item_code).val()) * parseFloat($("#price_" + jsonObj[i].item_code).text())).toFixed(2));
+
+            jsonObj[i].item_qnty = $("#qnty_" + jsonObj[i].item_code).val();
+
+            var tempData = JSON.stringify(jsonObj).toString().replace("[", "");
+            Cookies.set("ITEMS", tempData.replace("]", ""));
+            setCookieInServer();
+        });
+    }
+
+    if (jsonObj.length > 0) {
+        $("#noItem").hide();
+    }
+
+
+
+
+    function setCookieInServer() {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            contentType: "application/json",
+            data: JSON.stringify({ cookie: Cookies.get("ITEMS") }),
+            url: "/getCookie",
+            success: function (result) {
+
+            }, error: function (errVal) {
+
+
+            }
+        });
     }
 
 </script>
