@@ -7,6 +7,8 @@ var medicine = require("../data sets/med.json");
 var toiletries = require("../data sets/toiletries.json");
 var Cookies = require('js-cookie/src/js.cookie.js');
 var globalCookie = "";
+var Handlebars = require('handlebars');
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -47,14 +49,14 @@ router.get('/toiletries', function (req, res, next) {
 
 router.post('/getCookie', function (req, res) {
   var cookie = req.body.cookie;
-  console.log("eto ung cookie: " + cookie);
+
   if (cookie == "") {
     globalCookie = "";
   } else {
     globalCookie = JSON.parse("[" + cookie + "]");
 
   }
-  //SS console.log("from global cookie" + cookie);
+  console.log("Sample!!!!!!!!!!!!" + JSON.stringify(globalCookie));
 });
 
 router.get('/payment', function (req, res, next) {

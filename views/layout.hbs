@@ -24,7 +24,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg fixed-top alingnenaNavbar">
     <div class="container">
-      <a class="navbar-brand" href="#">Tindahan ni Aling Nena</a>
+      <a class="navbar-brand" href="/">Tindahan ni Aling Nena</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -99,20 +99,28 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    function homealertFunction() {
-      alert("Home Button")
-    }
+    $(document).ready(function () {
+      setCookieInServer();
+    })
 
-    function aboutalertFunction() {
-      alert("About Button")
-    }
+    function setCookieInServer() {
+      var cookieData = "";
+      if (Cookies.get("ITEMS") != undefined) {
+        cookieData = Cookies.get("ITEMS");
+      }
+      $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        contentType: "application/json",
+        data: JSON.stringify({ cookie: cookieData }),
+        url: "/getCookie",
+        success: function (result) {
 
-    function servicesalertFunction() {
-      alert("Services Button")
-    }
+        }, error: function (errVal) {
 
-    function contactalertFunction() {
-      alert("Contact Button")
+
+        }
+      });
     }
 
   </script>

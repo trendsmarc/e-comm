@@ -69,7 +69,7 @@
                             <form action="payment" method="GET">
                                 <div class="container">
                                     <label>Quantity</label>
-                                    <input type="number" min="1" value="1" id="qty_{{item_code}}" />
+                                    <input type="number" min="1" max="100" value="1" id="qty_{{item_code}}" />
                                     <div class="mt-1">
                                         <button type="button" class="btn btn-primary btn-sm" id="buyBtn_{{item_code}}">Buy
                                             Now</button>
@@ -100,7 +100,7 @@
 
     var decodedJson = decodeURIComponent("{{{decodedJson}}}");
     var jsonObj = JSON.parse(decodedJson);
-
+    console.log(jsonObj);
 
     if (Cookies.get("ITEMS") == undefined) {
         $("#cartCount").text(0);
@@ -126,6 +126,9 @@
             var hasDuplicate = false;
             var fakingIndex = 0;
 
+
+            //Kapag walang laman ang Cookie
+            //sa simula palang. As in Zero
             if (Cookies.get("ITEMS") == undefined) {
                 cookies = [];
             } else {
@@ -137,8 +140,6 @@
                 if (jsoncookie[d].item_code == tempItemCode) {
                     hasDuplicate = true;
                     fakingIndex = d;
-
-
                 }
             }
 
@@ -161,12 +162,10 @@
                 Cookies.set("ITEMS", cookies.toString());
             }
 
-
-
             $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
             setCookieInServer();
 
-
+            alert("Successfully Added to cart!");
         });
     }
 
@@ -174,11 +173,15 @@
 
 
     function setCookieInServer() {
+        var cookieData = "";
+        if (Cookies.get("ITEMS") != undefined) {
+            cookieData = Cookies.get("ITEMS");
+        }
         $.ajax({
             type: "POST",
             dataType: "JSON",
             contentType: "application/json",
-            data: JSON.stringify({ cookie: Cookies.get("ITEMS") }),
+            data: JSON.stringify({ cookie: cookieData }),
             url: "/getCookie",
             success: function (result) {
 
@@ -188,4 +191,5 @@
             }
         });
     }
+
 </script>

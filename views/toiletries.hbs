@@ -69,7 +69,7 @@
                         <div class="col-sm-7">
                             <div class="container">
                                 <label>Quantity</label>
-                                <input type="number" min="1" value="1" id="qty_{{item_code}}" />
+                                <input type="number" min="1" max="100" value="1" id="qty_{{item_code}}" />
                                 <div class="mt-1">
                                     <button type="button" class="btn btn-primary btn-sm">Buy Now</button>
                                 </div>
@@ -148,7 +148,7 @@
             $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
             setCookieInServer();
 
-
+            alert("Successfully Added to cart!");
         });
     }
 
