@@ -9,7 +9,6 @@ var Cookies = require('js-cookie/src/js.cookie.js');
 var globalCookie = "";
 var Handlebars = require('handlebars');
 
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', {
@@ -18,33 +17,61 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.get('/drinks', function (req, res, next) {
+/*food page*/
+router.get('/foods', HTML_ACCEPTED, function (req, res, next) {
+  res.render('index', {
+    items: alldata,
+    decodedJson: encodeURIComponent(JSON.stringify(alldata))
+  });
+});
+
+router.get('/foods', JSON_ACCEPTED, function (req, res, next) {
+  res.json(alldata)
+});
+
+/*drinks page*/
+router.get('/drinks', HTML_ACCEPTED, function (req, res, next) {
   res.render('drinks', {
     items: drinks,
     decodedJson: encodeURIComponent(JSON.stringify(drinks)),
   });
-
 });
 
-router.get('/condiments', function (req, res, next) {
+router.get('/drinks', JSON_ACCEPTED, function (req, res, next) {
+  res.json(drinks)
+});
+
+router.get('/condiments', HTML_ACCEPTED, function (req, res, next) {
   res.render('condiments', {
     items: condiments,
     decodedJson: encodeURIComponent(JSON.stringify(condiments))
   });
 });
 
-router.get('/medicine', function (req, res, next) {
+router.get('/condiments', JSON_ACCEPTED, function (req, res, next) {
+  res.json(condiments)
+});
+
+router.get('/medicine', HTML_ACCEPTED, function (req, res, next) {
   res.render('medicine', {
     items: medicine,
     decodedJson: encodeURIComponent(JSON.stringify(medicine))
   });
 });
 
-router.get('/toiletries', function (req, res, next) {
+router.get('/medicine', JSON_ACCEPTED, function (req, res, next) {
+  res.json(medicine)
+});
+
+router.get('/toiletries', HTML_ACCEPTED, function (req, res, next) {
   res.render('toiletries', {
     items: toiletries,
     decodedJson: encodeURIComponent(JSON.stringify(toiletries))
   });
+});
+
+router.get('/toiletries', JSON_ACCEPTED, function (req, res, next) {
+  res.json(toiletries)
 });
 
 router.post('/getCookie', function (req, res) {
@@ -68,5 +95,8 @@ router.get('/payment', function (req, res, next) {
 
   //console.log(JSON.parse("[" + globalCookie + "]")[0].item_code);
 });
+
+function HTML_ACCEPTED (req, res, next) { return req.accepts("html") ? next() : next("route") }
+function JSON_ACCEPTED (req, res, next) { return req.accepts("json") ? next() : next("route") }
 
 module.exports = router;
