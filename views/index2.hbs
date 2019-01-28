@@ -1,0 +1,199 @@
+<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+            <img class="d-block img-fluid" src="images/Food/biscuit.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block img-fluid" src="images/Food/snack.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block img-fluid" src="images/Food/egg.jpg" alt="Third slide">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="row">
+
+    {{!-- <button class="btn-default" id="sampleBtn">PUSH</button> --}}
+
+    {{!-- {{#each items}}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="{{item_url}}" alt=""></a>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a href="#{{item_code}}" data-toggle="modal">{{item_name}}</a>
+                </h4>
+                <h5>{{item_price}}</h5>
+                <p class="card-text">{{item_desc}}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+        </div>
+    </div>
+    {{/each}} --}}
+
+    <div class="col-lg-4 col-md-6 mb-4" id="itemDisplay">
+
+    </div>
+
+
+    {{#each items}}
+    <div class="modal fade" id="{{item_code}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">{{item_name}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <img class="card-img-top" src="{{item_url}}" alt=""></a>
+                        </div>
+                        <div class="col-sm-7">
+                            <form action="payment" method="GET">
+                                <div class="container">
+                                    <label>Quantity</label>
+                                    <input type="number" min="1" max="100" value="1" id="qty_{{item_code}}" />
+                                    <div class="mt-1">
+                                        <button type="button" class="btn btn-primary btn-sm" id="buyBtn_{{item_code}}">Buy
+                                            Now</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="addToCart_{{item_code}}" class="btn btn-default btn-danger btn-sm">Add to
+                        Cart</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    var decodedJson = decodeURIComponent("{{{decodedJson}}}");
+    var jsonObj = JSON.parse(decodedJson);
+    console.log(jsonObj);
+
+    if (Cookies.get("ITEMS") == undefined) {
+        $("#cartCount").text(0);
+    } else {
+        $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
+    }
+
+
+
+    for (let index in jsonObj) {
+
+        $("#addToCart_" + jsonObj[index].item_code).click(function () {
+
+            var tempItemCode = jsonObj[index].item_code;
+            var tempItemURL = jsonObj[index].item_url;
+            var tempItemName = jsonObj[index].item_name;
+            var tempItemPrice = jsonObj[index].item_price;
+            var tempItemDesc = jsonObj[index].item_desc;
+            var tempItemCate = jsonObj[index].item_cate;
+
+            var cookies = [Cookies.get("ITEMS")];
+            var jsoncookie = "";
+            var hasDuplicate = false;
+            var fakingIndex = 0;
+
+
+            //Kapag walang laman ang Cookie
+            //sa simula palang. As in Zero
+            if (Cookies.get("ITEMS") == undefined) {
+                cookies = [];
+            } else {
+                cookies = Cookies.get("ITEMS").split(",");
+                jsoncookie = JSON.parse("[" + Cookies.get("ITEMS") + "]");
+            }
+
+            for (let d in jsoncookie) {
+                if (jsoncookie[d].item_code == tempItemCode) {
+                    hasDuplicate = true;
+                    fakingIndex = d;
+                }
+            }
+
+            if (hasDuplicate) {
+                jsoncookie[fakingIndex].item_qnty = parseInt(jsoncookie[fakingIndex].item_qnty) + parseInt($("#qty_" + tempItemCode).val());
+                //console.log("eto ung sa may duplicate: " + JSON.stringify(jsoncookie))
+                var tempData = JSON.stringify(jsoncookie).toString().replace("[", "");
+                Cookies.set("ITEMS", tempData.replace("]", ""));
+            } else {
+                cookies.push(JSON.stringify({
+                    "item_code": tempItemCode,
+                    "item_url": tempItemURL,
+                    "item_name": tempItemName,
+                    "item_price": tempItemPrice,
+                    "item_desc": tempItemDesc,
+                    "item_cate": tempItemCate,
+                    "item_qnty": $("#qty_" + tempItemCode).val()
+                }));
+                //console.log("eto ung sa walang duplicate: " + cookies.toString())
+                Cookies.set("ITEMS", cookies.toString());
+            }
+
+            $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
+            setCookieInServer();
+
+            alert("Successfully Added to cart!");
+        });
+    }
+
+    setCookieInServer();
+
+
+    function setCookieInServer() {
+        var cookieData = "";
+        if (Cookies.get("ITEMS") != undefined) {
+            cookieData = Cookies.get("ITEMS");
+        }
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            contentType: "application/json",
+            data: JSON.stringify({ cookie: cookieData }),
+            url: "/getCookie",
+            success: function (result) {
+
+            }, error: function (errVal) {
+
+
+            }
+        });
+    }
+
+</script>

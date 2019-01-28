@@ -25,171 +25,29 @@
     </a>
 </div>
 
-<div class="row">
-
-    {{!-- <button class="btn-default" id="sampleBtn">PUSH</button> --}}
-
-    {{#each items}}
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="{{item_url}}" alt=""></a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#{{item_code}}" data-toggle="modal">{{item_name}}</a>
-                </h4>
-                <h5>{{item_price}}</h5>
-                <p class="card-text">{{item_desc}}</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
+<div class="container mb-3">
+    <div class="dropdown" style="cursor: pointer;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Sort Items
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" onclick="sortingFuncASC()">Sort A-Z</a>
+            <a class="dropdown-item" onclick="sortingFuncDESC()">Sort Z-A</a>
+            <a class="dropdown-item" onclick="priceLow()">Sort Price Lowest-Highest</a>
+            <a class="dropdown-item" onclick="priceHigh()">Sort Price Highest-Lowest</a>
         </div>
     </div>
-    {{/each}}
+</div>
 
-
-    {{#each items}}
-    <div class="modal fade" id="{{item_code}}">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">{{item_name}}</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <img class="card-img-top" src="{{item_url}}" alt=""></a>
-                        </div>
-                        <div class="col-sm-7">
-                            <form action="payment" method="GET">
-                                <div class="container">
-                                    <label>Quantity</label>
-                                    <input type="number" min="1" max="100" value="1" id="qty_{{item_code}}" />
-                                    <div class="mt-1">
-                                        <button type="button" class="btn btn-primary btn-sm" id="buyBtn_{{item_code}}">Buy
-                                            Now</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" id="addToCart_{{item_code}}" class="btn btn-default btn-danger btn-sm">Add to
-                        Cart</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    {{/each}}
+<div class="container" id="itemDisplay">
 
 </div>
 
+<div id="modalDisplay"></div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script>
-
-    var decodedJson = decodeURIComponent("{{{decodedJson}}}");
-    var jsonObj = JSON.parse(decodedJson);
-    console.log(jsonObj);
-
-    if (Cookies.get("ITEMS") == undefined) {
-        $("#cartCount").text(0);
-    } else {
-        $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
-    }
-
-
-
-    for (let index in jsonObj) {
-
-        $("#addToCart_" + jsonObj[index].item_code).click(function () {
-
-            var tempItemCode = jsonObj[index].item_code;
-            var tempItemURL = jsonObj[index].item_url;
-            var tempItemName = jsonObj[index].item_name;
-            var tempItemPrice = jsonObj[index].item_price;
-            var tempItemDesc = jsonObj[index].item_desc;
-            var tempItemCate = jsonObj[index].item_cate;
-
-            var cookies = [Cookies.get("ITEMS")];
-            var jsoncookie = "";
-            var hasDuplicate = false;
-            var fakingIndex = 0;
-
-
-            //Kapag walang laman ang Cookie
-            //sa simula palang. As in Zero
-            if (Cookies.get("ITEMS") == undefined) {
-                cookies = [];
-            } else {
-                cookies = Cookies.get("ITEMS").split(",");
-                jsoncookie = JSON.parse("[" + Cookies.get("ITEMS") + "]");
-            }
-
-            for (let d in jsoncookie) {
-                if (jsoncookie[d].item_code == tempItemCode) {
-                    hasDuplicate = true;
-                    fakingIndex = d;
-                }
-            }
-
-            if (hasDuplicate) {
-                jsoncookie[fakingIndex].item_qnty = parseInt(jsoncookie[fakingIndex].item_qnty) + parseInt($("#qty_" + tempItemCode).val());
-                //console.log("eto ung sa may duplicate: " + JSON.stringify(jsoncookie))
-                var tempData = JSON.stringify(jsoncookie).toString().replace("[", "");
-                Cookies.set("ITEMS", tempData.replace("]", ""));
-            } else {
-                cookies.push(JSON.stringify({
-                    "item_code": tempItemCode,
-                    "item_url": tempItemURL,
-                    "item_name": tempItemName,
-                    "item_price": tempItemPrice,
-                    "item_desc": tempItemDesc,
-                    "item_cate": tempItemCate,
-                    "item_qnty": $("#qty_" + tempItemCode).val()
-                }));
-                //console.log("eto ung sa walang duplicate: " + cookies.toString())
-                Cookies.set("ITEMS", cookies.toString());
-            }
-
-            $("#cartCount").text(Cookies.get("ITEMS").split("},{").length);
-            setCookieInServer();
-
-            alert("Successfully Added to cart!");
-        });
-    }
-
-    setCookieInServer();
-
-
-    function setCookieInServer() {
-        var cookieData = "";
-        if (Cookies.get("ITEMS") != undefined) {
-            cookieData = Cookies.get("ITEMS");
-        }
-        $.ajax({
-            type: "POST",
-            dataType: "JSON",
-            contentType: "application/json",
-            data: JSON.stringify({ cookie: cookieData }),
-            url: "/getCookie",
-            success: function (result) {
-
-            }, error: function (errVal) {
-
-
-            }
-        });
-    }
-
-</script>
+<script src="javascripts/script.js"></script>

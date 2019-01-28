@@ -10,31 +10,25 @@ var globalCookie = "";
 var Handlebars = require('handlebars');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', {
-    items: alldata,
-    decodedJson: encodeURIComponent(JSON.stringify(alldata))
-  });
+router.get('/', HTML_ACCEPTED, function (req, res, next) {
+  res.render('index');
+});
+router.get('/', JSON_ACCEPTED, function (req, res, next) {
+  res.json(alldata);
 });
 
 /*food page*/
 router.get('/foods', HTML_ACCEPTED, function (req, res, next) {
-  res.render('index', {
-    items: alldata,
-    decodedJson: encodeURIComponent(JSON.stringify(alldata))
-  });
+  res.render('index');
 });
 
 router.get('/foods', JSON_ACCEPTED, function (req, res, next) {
-  res.json(alldata)
+  res.json(alldata);
 });
 
 /*drinks page*/
 router.get('/drinks', HTML_ACCEPTED, function (req, res, next) {
-  res.render('drinks', {
-    items: drinks,
-    decodedJson: encodeURIComponent(JSON.stringify(drinks)),
-  });
+  res.render('drinks');
 });
 
 router.get('/drinks', JSON_ACCEPTED, function (req, res, next) {
@@ -42,10 +36,7 @@ router.get('/drinks', JSON_ACCEPTED, function (req, res, next) {
 });
 
 router.get('/condiments', HTML_ACCEPTED, function (req, res, next) {
-  res.render('condiments', {
-    items: condiments,
-    decodedJson: encodeURIComponent(JSON.stringify(condiments))
-  });
+  res.render('condiments');
 });
 
 router.get('/condiments', JSON_ACCEPTED, function (req, res, next) {
@@ -53,10 +44,7 @@ router.get('/condiments', JSON_ACCEPTED, function (req, res, next) {
 });
 
 router.get('/medicine', HTML_ACCEPTED, function (req, res, next) {
-  res.render('medicine', {
-    items: medicine,
-    decodedJson: encodeURIComponent(JSON.stringify(medicine))
-  });
+  res.render('medicine');
 });
 
 router.get('/medicine', JSON_ACCEPTED, function (req, res, next) {
@@ -64,10 +52,7 @@ router.get('/medicine', JSON_ACCEPTED, function (req, res, next) {
 });
 
 router.get('/toiletries', HTML_ACCEPTED, function (req, res, next) {
-  res.render('toiletries', {
-    items: toiletries,
-    decodedJson: encodeURIComponent(JSON.stringify(toiletries))
-  });
+  res.render('toiletries');
 });
 
 router.get('/toiletries', JSON_ACCEPTED, function (req, res, next) {
@@ -96,7 +81,12 @@ router.get('/payment', function (req, res, next) {
   //console.log(JSON.parse("[" + globalCookie + "]")[0].item_code);
 });
 
-function HTML_ACCEPTED (req, res, next) { return req.accepts("html") ? next() : next("route") }
-function JSON_ACCEPTED (req, res, next) { return req.accepts("json") ? next() : next("route") }
+function HTML_ACCEPTED(req, res, next) {
+  return req.accepts("html") ? next() : next("route")
+}
+
+function JSON_ACCEPTED(req, res, next) {
+  return req.accepts("json") ? next() : next("route")
+}
 
 module.exports = router;
