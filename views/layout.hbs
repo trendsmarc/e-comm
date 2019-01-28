@@ -3,135 +3,96 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>Tindahan ni Aling Nena</title>
+    <title>Tindahan ni Aling Nena</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="css/shop-homepage.css" rel="stylesheet">
-  <link href="css/alingnena.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/alingnena.css" rel="stylesheet">
 
 </head>
 
 <body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg fixed-top alingnenaNavbar">
-    <div class="container">
-      <a class="navbar-brand" href="/">Tindahan ni Aling Nena</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#" onClick="homealertFunction();">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/">About </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark alingnenaNavbar fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Tindahan ni Aling Nena</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropup">
+                        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Sale Item
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="condiments" data-target="condiments">Condiments</a>
+                            <a class="dropdown-item" href="drinks">Drinks</a>
+                            <a class="dropdown-item" href="foods">Foods</a>
+                            <a class="dropdown-item" href="medicine">Medicine</a>
+                            <a class="dropdown-item" href="toiletries">Toiletries</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/payment">Cart
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger" id="cartCount">0</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Page Content -->
-  <div class="container">
-
-    <div class="row">
-
-      <div class="col-lg-3">
-        <h1 class="my-4"></h1>
-        <div class="list-group">
-          <a href="foods" class="list-group-item">Food</a>
-          <a href="drinks" class="list-group-item">Drinks</a>
-          <a href="condiments" class="list-group-item">Condiments</a>
-          <a href="medicine" class="list-group-item">Medicine and Kit</a>
-          <a href="toiletries" class="list-group-item">Toiletries</a>
         </div>
+    </nav>
+    <header class="masterHeader">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">It's Nice To Meet You Here</div>
+                <div class="intro-heading text-uppercase">Welcome sa Tindahan ni Aling Nena</div>
+                <div class="form-row">
+                    <div class="col-12 col-md-9 mb-2 mb-md-0">
+                        <input type="email" class="form-control form-control-lg" placeholder="Enter the items that you're looking for..">
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <button type="submit" class="btn btn-block btn-lg btn-primary">Search Item!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-      </div>
-      <!-- /.col-lg-3 -->
-
-      <div class="col-lg-9">
-        <!-- /.row -->
+    <!-- Page Content -->
+    <section>
         {{{body}}}
-      </div>
-      <!-- /.col-lg-9 -->
+    </section>
 
-    </div>
-    <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-5 alingnenaFooter">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    $(document).ready(function () {
-      setCookieInServer();
-    })
-
-    function setCookieInServer() {
-      var cookieData = "";
-      if (Cookies.get("ITEMS") != undefined) {
-        cookieData = Cookies.get("ITEMS");
-      }
-      $.ajax({
-        type: "POST",
-        dataType: "JSON",
-        contentType: "application/json",
-        data: JSON.stringify({ cookie: cookieData }),
-        url: "/getCookie",
-        success: function (result) {
-
-        }, error: function (errVal) {
-
-
-        }
-      });
-    }
-
-  </script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
 </html>
+
+<script>
+
+    $(document).ready(function () {
+        $("header").scroll(function () {
+            alert("Sample")
+        });
+    });
+
+</script>

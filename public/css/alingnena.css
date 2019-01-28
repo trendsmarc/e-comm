@@ -1,5 +1,35 @@
+header.masterHeader {
+    text-align: center;
+    color: #fff;
+    background-image: url(../images/initial/asian-assorted-background-917371.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+}
+
+header.masterHeader .intro-text {
+    padding-top: 300px;
+    padding-bottom: 200px;
+}
+
+
+header.masterHeader .intro-text .intro-lead-in {
+    font-size: 30px;
+    font-style: italic;
+    line-height: 20px;
+    margin-bottom: 25px;
+}
+
+header.masterHeader .intro-text .intro-heading {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-bottom: 25px;
+}
+
 .alingnenaNavbar {
-    background-color: #006995;
+    background-color: transparent;
 }
 
 .alingnenaFooter {
