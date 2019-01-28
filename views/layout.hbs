@@ -8,21 +8,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tindahan ni Aling Nena</title>
+    <title>Full - Start Bootstrap Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="css/full.css" rel="stylesheet">
     <link href="css/alingnena.css" rel="stylesheet">
 
 </head>
 
 <body>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark alingnenaNavbar fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="/">Tindahan ni Aling Nena</a>
+            <a class="navbar-brand" href="#">Start Bootstrap</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,18 +36,8 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item dropup">
-                        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Sale Item
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="condiments" data-target="condiments">Condiments</a>
-                            <a class="dropdown-item" href="drinks">Drinks</a>
-                            <a class="dropdown-item" href="foods">Foods</a>
-                            <a class="dropdown-item" href="medicine">Medicine</a>
-                            <a class="dropdown-item" href="toiletries">Toiletries</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Services</a>
@@ -57,6 +49,7 @@
             </div>
         </div>
     </nav>
+
     <header class="masterHeader">
         <div class="container">
             <div class="intro-text">
@@ -74,10 +67,13 @@
         </div>
     </header>
 
-    <!-- Page Content -->
     <section>
-        {{{body}}}
+        <div class="container">
+            {{{body}}}
+        </div>
     </section>
+
+    <!-- Page Content -->
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -86,13 +82,3 @@
 </body>
 
 </html>
-
-<script>
-
-    $(document).ready(function () {
-        $("header").scroll(function () {
-            alert("Sample")
-        });
-    });
-
-</script>

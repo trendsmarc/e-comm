@@ -6,6 +6,7 @@ header.masterHeader {
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
+    height: -webkit-fill-available;
 }
 
 header.masterHeader .intro-text {
