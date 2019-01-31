@@ -19,7 +19,9 @@ router.get('/', JSON_ACCEPTED, function (req, res, next) {
 
 /*food page*/
 router.get('/foods', HTML_ACCEPTED, function (req, res, next) {
-  res.render('index');
+  res.render('index', {
+    title: "Foods"
+  });
 });
 
 router.get('/foods', JSON_ACCEPTED, function (req, res, next) {
@@ -28,7 +30,9 @@ router.get('/foods', JSON_ACCEPTED, function (req, res, next) {
 
 /*drinks page*/
 router.get('/drinks', HTML_ACCEPTED, function (req, res, next) {
-  res.render('drinks');
+  res.render('drinks', {
+    title: "Drinks"
+  });
 });
 
 router.get('/drinks', JSON_ACCEPTED, function (req, res, next) {
@@ -36,7 +40,9 @@ router.get('/drinks', JSON_ACCEPTED, function (req, res, next) {
 });
 
 router.get('/condiments', HTML_ACCEPTED, function (req, res, next) {
-  res.render('condiments');
+  res.render('condiments', {
+    title: "Condiments"
+  });
 });
 
 router.get('/condiments', JSON_ACCEPTED, function (req, res, next) {
@@ -44,7 +50,9 @@ router.get('/condiments', JSON_ACCEPTED, function (req, res, next) {
 });
 
 router.get('/medicine', HTML_ACCEPTED, function (req, res, next) {
-  res.render('medicine');
+  res.render('medicine', {
+    title: "Medicine"
+  });
 });
 
 router.get('/medicine', JSON_ACCEPTED, function (req, res, next) {
@@ -52,11 +60,19 @@ router.get('/medicine', JSON_ACCEPTED, function (req, res, next) {
 });
 
 router.get('/toiletries', HTML_ACCEPTED, function (req, res, next) {
-  res.render('toiletries');
+  res.render('toiletries', {
+    title: "Toiletries"
+  });
 });
 
 router.get('/toiletries', JSON_ACCEPTED, function (req, res, next) {
   res.json(toiletries)
+});
+
+router.get('/cart', HTML_ACCEPTED, function (req, res, next) {
+  res.render('cart', {
+    title: "Payment now!"
+  });
 });
 
 router.post('/getCookie', function (req, res) {

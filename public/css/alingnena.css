@@ -14,7 +14,6 @@ header.masterHeader .intro-text {
     padding-bottom: 200px;
 }
 
-
 header.masterHeader .intro-text .intro-lead-in {
     font-size: 30px;
     font-style: italic;
@@ -57,4 +56,20 @@ input[type=number]::-webkit-inner-spin-button {
     vertical-align: baseline;
     border-radius: .25em;
     background-color: aqua;
+}
+
+.no-boarder {
+    border: none;
+}
+
+.transparency {
+    background-color: rgba(255, 255, 255, 0.397);
+    border-radius: 0%;
+    border: none;
+    color: #fff;
+}
+
+.customSearch {
+    border-radius: 1px;
+    box-shadow: 0 4px 8px 0 rgba(0, 104, 149, 0.2), 0 6px 20px 0 rgba(0, 104, 149, 0.19);
 }
